@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <link href="http://fonts.cdnfonts.com/css/pirulen" rel="stylesheet">
+    <style>
+        .login_bg {
+    background: url({% static 'apora_login.jpg' %});
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    text-align:center;
+    }
+    .supervisor_h2 {
+    font-family:Pirulen Rg;
+    padding:40px;
+    font-size:70px;
+    }
+    .sup_container{
+        width:175px;
+        height:175px;
+        border-radius:20px;
+        background-color:white;
+        box-shadow: 1px 5px #7b7b7b;
+        margin-bottom:50px;
+        padding:10px;
+        background-image: linear-gradient(#e6e6e6, #f2f2f2,#e6e6e6);
+    }
+    .img_container{
+        height:130px;
+        width:130px;
+    }
+    </style>
+</head>
+<body class="login_bg">
+<center><h1 class="supervisor_h2">APORA</h1></center>
+<div style="padding:40px;" class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="container sup_container">
+                <a href="#"><img class="img_container" src="{% static 'dashboard.png' %}"></a>
+                <h5>Dashboard</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container sup_container">
+                <a href="{% url 'supervisor:bincode' %}"><img class="img_container" src="{% static 'bincode.png' %}"></a>
+                <h5>QR generation</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container sup_container">
+                <a href="{% url 'supervisor:planogram' %}"><img class="img_container" src="{% static 'planogram.png' %}"></a>
+                <h5>Planogram</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container sup_container">
+                <a href="{% url 'supervisor:activity_status' %}"><img class="img_container" src="{% static 'picklist_status.png' %}"></a>
+                <h5>Picklist Status</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container sup_container">
+                <a href="{% url 'supervisor:picklist_reassign' %}"><img class="img_container" src="{% static 'picklist_transfer.png' %}"></a>
+                <h5>Picklist Transfer</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="container sup_container">
+                <a href="{% url 'supervisor:logout' %}"><img class="img_container" src="{% static 'logout.png' %}"></a>
+                <h5>Logout</h5>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

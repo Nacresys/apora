@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <link href="http://fonts.cdnfonts.com/css/pirulen" rel="stylesheet">
+    <style>
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #FF8400;
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #FF9900;
+    }
+
+    #scrollable_div{
+        background-color:#e5e5e5;
+        width:100%;
+        height:500px;
+        overflow-y:scroll;
+        border-radius:15px;
+    }
+
+    #non_scrollable_div{
+        background-color:#e5e5e5;
+        width:100%;
+        height:500px;
+        border-radius:15px;
+    }
+
+    #tb_bg{
+      background-color:#f2f2f2;
+    }
+
+    .colored_table{
+        background-color:#FF8400;
+    }
+    #product_list_div{
+        width:100%;
+        height:490px;
+        border-radius:10px;
+        background-color:white;
+        overflow-y:scroll;
+        padding:10px;
+    }
+
+    </style>
+</head>
+<body style="overflow-x:hidden;">
+{% for message in messages %}
+<div class="container-fluid p-0" id="msg">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="document.getElementById('msg').style.display='none'">
+      <span aria-hidden="True">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+<div class="row">
+    <div style="text-align:left;" class="col-md-6 col-sm-6">
+        <h2 style="font-family:Pirulen Rg;padding:20px;">APORA</h2>
+    </div>
+    <div style="text-align:right;" class="col-md-6 col-sm-6">
+        <a href="{% url 'picker:picker_login' %}"><img style="padding:20px;width:90px;height:90px;" src="{% static 'home_logo.png' %}"></a>
+    </div>
+    <center><h4>PICKER VIEW</h4></center>
+    <div style="padding:30px;" class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="container" id="non_scrollable_div">
+                    <div id="product_list_div" class="container">
+                        <table class="table table-bordered">
+                           <thead>
+                              <tr style="background-color:#cccccc;">
+                                  <td>Product ID</td>
+                                  <td>Product Name</td>
+                                  <td>Batch</td>
+                                  <td>Qty</td>
+                                  <td>Row</td>
+                                  <td>Rack</td>
+                                  <td>Shelf</td>
+                                  <td>Verify</td>
+                              </tr>
+                           </thead>
+                          <tbody>
+                          {% for i in pick %}
+                            <tr>
+                                <td>{{i.0}}</td>
+                                <td>{{i.1}}</td>
+                                <td>{{i.2}}</td>
+                                <td>{{i.3}}</td>
+                                <td>{{i.4}}</td>
+                                <td>{{i.5}}</td>
+                                <td>{{i.6}}</td>
+                                <td><a class="btn" style="background-image: linear-gradient(#FF9900, #FF8400,#FF8400);" href="{% url 'picker:pickqr' i.0 %}">Scan</a></td>
+                            </tr>
+                          {% endfor %}
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

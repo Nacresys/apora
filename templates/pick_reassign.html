@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <link href="http://fonts.cdnfonts.com/css/pirulen" rel="stylesheet">
+    <style>
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #FF8400;
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #FF9900;
+    }
+
+    #scrollable_div{
+
+        width:100%;
+        height:300px;
+        overflow-y:scroll;
+        border-radius:15px;
+    }
+    #scrollable_div1{
+
+        width:100%;
+        height:300px;
+        overflow-y:scroll;
+        border-radius:15px;
+    }
+    #scrollable_div2{
+
+        width:100%;
+        height:300px;
+        overflow-y:scroll;
+        border-radius:15px;
+    }
+
+    #non_scrollable_div{
+        background-color:#e5e5e5;
+        width:100%;
+        height:500px;
+        border-radius:15px;
+    }
+
+    #tb_bg{
+      background-color:#f2f2f2;
+    }
+    #tb_bg1{
+      background-color:#f2f2f2;
+    }
+    #tb_bg2{
+      background-color:#f2f2f2;
+    }
+
+    .colored_table{
+        background-color:#FF8400;
+    }
+    #product_list_div{
+        width:100%;
+        border-radius:10px;
+
+
+        padding:10px;
+    }
+
+    button:hover{
+        background-image: linear-gradient(#FF8400, #FF9900,#FF9900);
+    }
+
+    </style>
+</head>
+<body style="overflow-x:hidden;">
+<div class="row">
+    <div style="text-align:left;" class="col-md-6 col-sm-6">
+        <h2 style="font-family:Pirulen Rg;padding:20px;">APORA</h2>
+    </div>
+    <div style="text-align:right;" class="col-md-6 col-sm-6">
+        <a href="{% url 'supervisor:supervisor_login' %}"><img style="padding:20px;width:90px;height:90px;" src="{% static 'home_logo.png' %}"></a>
+    </div>
+    <center><h4>PICKER RE-ASSIGN</h4></center>
+    <div style="padding:30px;" class="container">
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-8">
+                <div class="container" id="non_scrollable_div">
+                    <br>
+                    <div id="product_list_div" class="container">
+                        <br>
+                            <br>
+                            <br>
+                        <form method="POST" action="{% url 'supervisor:reassign' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                              <div class="col-4" style="text-align:center;">
+
+                                <label for="active"><h6><b>Active Pickers:</b></h6></label>
+
+                                <select class="btn btn-danger dropdown-toggle" name="active" id="active">
+                                  <option value="">--select--</option>
+                                  {% for i in drp_active %}
+                                    <option value="{{i.0}}">{{i.1}}</option>
+                                  {% endfor %}
+                                </select>
+                              </div>
+                              <div style="text-align:center;" class="col-4"><h1><i class="bx bx-right-arrow-alt"></i></h1></div>
+                              <div class="col-4" style="text-align:center;">
+                                <label for="inactive"><h6><b>Free Pickers:</b></h6></label>
+
+                                <select class="btn btn-success dropdown-toggle" name="inactive" id="inactive">
+                                  <option value="">--select--</option>
+                                  {% for i in drp_inactive %}
+                                    <option value="{{i.0}}">{{i.1}}</option>
+                                  {% endfor %}
+
+                                </select>
+                              </div>
+                            </div>
+
+                            <br>
+                            <br>
+                            <br>
+                              <center>
+                                <button style="background-image: linear-gradient(#FF9900, #FF8400,#FF8400);" type="submit" class="btn">Submit</button>
+                              </center>
+
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>

@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <link href="http://fonts.cdnfonts.com/css/pirulen" rel="stylesheet">
+    <style>
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #FF8400;
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #FF9900;
+    }
+
+    #scrollable_div{
+        background-color:#e5e5e5;
+        width:100%;
+        height:500px;
+        overflow-y:scroll;
+        border-radius:15px;
+    }
+
+    #non_scrollable_div{
+        background-color:#e5e5e5;
+        width:100%;
+        height:500px;
+        border-radius:15px;
+    }
+
+    #tb_bg{
+      background-color:#f2f2f2;
+    }
+
+    .colored_table{
+        background-color:#FF8400;
+    }
+    #product_list_div{
+        width:100%;
+        height:290px;
+        border-radius:10px;
+        background-color:white;
+        overflow-y:scroll;
+        padding:10px;
+    }
+
+    </style>
+</head>
+<body style="overflow-x:hidden;">
+<div class="row">
+    <div style="text-align:left;" class="col-md-6 col-sm-6">
+        <h2 style="font-family:Pirulen Rg;padding:20px;">APORA</h2>
+    </div>
+    <div style="text-align:right;" class="col-md-6 col-sm-6">
+        <a href="{% url 'picker:picker_login' %}"><img style="padding:20px;width:90px;height:90px;" src="{% static 'home_logo.png' %}"></a>
+    </div>
+    <center><h4>BIN CODE SCAN AND PRODUCT DROP</h4></center>
+    <div style="padding:30px;" class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <div id="scrollable_div" class="container">
+                    <div style="background-color:#e5e5e5;position:fixed;padding:5px;width:200px;">
+                    <center><h5>ORDER ID</h5></center>
+                    </div>
+                    <br>
+                    <br>
+                        <table id="tb_bg" class="table" style="">
+                            <tbody>
+                            {% for i in list %}
+                                <tr>
+                                    <td><a class="btn" href="{% url 'picker:orderdetails' i.0 %}">{{i.0}}</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="container" id="non_scrollable_div">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="container" style="padding-top:10px;">
+                                <table class="table" style="width:100%">
+                                  <tr>
+                                    <td style="width:250px;background-color:#FF8400;">PO Number</td>
+                                    <td>{{odrid}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="background-color:#FF8400;">PO Date</td>
+                                    <td>{{date}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="background-color:#FF8400;">Customer Name</td>
+                                    <td>{{name}}</td>
+                                  </tr>
+                                    <tr>
+                                    <td style="background-color:#FF8400;">Address & City</td>
+                                    <td>{{address}}</td>
+                                  </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="container" style="text-align:center">
+                                <form method="POST" action="{% url 'picker:qrverify'%}">
+                                    {% csrf_token %}
+                                <img style="width:130px;height:130px;padding:10px;" src="{% static 'qrscan.png' %}">
+                                <br>
+                                <button type="submit" value="{{odrid}}" style="background-image: linear-gradient(#FF9900, #FF8400,#FF8400);" name="oid" class="btn">Scan Bin QR Code</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="product_list_div" class="container">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr style="background-color:#cccccc;">
+                                <td>Product ID</td>
+                                <td>Product Name</td>
+                                <td>Order Quantity</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {% for i in prod_list %}
+                            <tr>
+                                <td>{{i.0}}</td>
+                                <td>{{i.1}}</td>
+                                <td>{{i.2}}</td>
+                            </tr>
+                          {% endfor %}
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
